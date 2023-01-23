@@ -1,4 +1,16 @@
-<template>
+{% extends 'homenet/base.html' %}
+
+
+{% block title %}Finance{% endblock %}
+
+
+{% block head %}
+  <style scoped>
+  </style>
+{% endblock %}
+
+
+{% block body %}
   <div class="hello">
 
     <div class="top">
@@ -52,10 +64,10 @@
     </div>
 
   </div>
-</template>
+{% endblock %}
 
-<script>
-</script>
 
-<style scoped>
-</style>
+{% block script %}
+  <script>
+  </script>
+{% endblock %}
