@@ -1,4 +1,4 @@
-# accountant
+# homenet
 
 
 #### Routes
@@ -9,7 +9,7 @@
   - [ ] /reset
   - [ ] /confirm
 - [ ] /finance
-  - [ ] /<user_id>
+  - [ ] /user/<user_id>
 - [ ] /crud - main crud page for all users to vote ?!
   - [ ] /user/<user_id>
 - [ ] /user/<user_id>
@@ -23,7 +23,7 @@ $summary = (in+out)
   --------+-----------+--------
   User_1  |  User_2   | User_N
   summary |  summary  | summary
- 
+
  @table.left
           +-----------+
           |  summary  |
@@ -33,4 +33,19 @@ $summary = (in+out)
   monthly summary
     -------+---------+---------
     User_N | -139 r. | datetime
+
+
+### _View_page_body
+
+    { block navbar }
+         navbar
+
+    { block container }
+    =============================================
+    { block top }
+        $filter.date(%Y-%m) || $summary.filtered {$currencies} || $summary {$currencies}
+
+    { block table-left } || { block table-right }
+          Table summary  ||       Table expenses
+          Table users    ||
 ```
