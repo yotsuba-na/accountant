@@ -1,4 +1,4 @@
-{% extends 'homenet/base.html' %}
+{% extends 'base.html' %}
 
 
 {% block title %}Finance{% endblock %}
@@ -6,6 +6,33 @@
 
 {% block head %}
   <style>
+    .nav {
+      display: grid;
+    }
+    .nav .filter {
+      grid-row: 1;
+      grid-column: 1 / 3;
+    }
+    .nav .summary {
+      grid-row: 1;
+      grid-column: 3 / 12;
+    }
+
+    .dynamic {
+      display: grid;
+    }
+    .dynamic .left {
+      grid-row: 1;
+      grid-column: 1 / 3;
+    }
+    .dynamic .middle {
+      grid-row: 1;
+      grid-column: 3 / 10;
+    }
+    .dynamic .right {
+      grid-row: 1;
+      grid-column: 10 / 12;
+    }
   </style>
 {% endblock %}
 
@@ -15,6 +42,9 @@
 
     <div class="nav">
       <div class="filter">
+        <select>
+          <option>a</option>
+        </select>
       </div>
       <div class="summary">
         <div class="filtered">
