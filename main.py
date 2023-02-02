@@ -3,14 +3,14 @@ from flask import Flask, render_template
 
 app = Flask(
   __name__,
-  static_folder='static/homenet',
-  template_folder='templates/homenet'
+  static_folder='static/accountant',
+  template_folder='templates/accountant'
 )
 
 
 @app.route('/')
 def main():
-  return render_template('finance.vue')
+  return render_template('main.vue')
 
 
 if __name__ == '__main__':
