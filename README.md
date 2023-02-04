@@ -108,10 +108,10 @@ $todo - body
 | @table.ScheduleCode | id  | Uid | Code |
 | :-----------------: | :-: | :-: | :--: |
 
-| @table.FuncName | id  | Uid | Name |
+| @table.FuncCode | id  | Uid | Code |
 | :-------------: | :-: | :-: | :--: |
 
-| @table.Schedule | id  | Uid | Title | ScheduleCodeID | FuncNameID | Value | Wid |
+| @table.Schedule | id  | Uid | Title | ScheduleCodeID | FuncCodeID | Value | Wid |
 | :-------------: | :-: | :-: | :---: | :------------: | :--------: | :---: | :-: |
 
 <hr />
@@ -124,8 +124,8 @@ $todo - body
 | @table.TodoCurrency | id  | Tid | CurrencyID | Value |
 | :-----------------: | :-: | :-: | :--------: | :---: |
 
-| @table.Todo | id  | Uid | Title | State | Value | TodoCurrencyID |
-| :---------: | :-: | :-: | :---: | :---: | :---: | :------------: |
+| @table.Todo | id  | Uid | Title | State | TodoCurrencyID | Value |
+| :---------: | :-: | :-: | :---: | :---: | :------------: | :---: |
 
-| @table.TodoItems | id  | Tid | Title | State | Value | TodoCurrencyID |
-| :--------------: | :-: | :-: | :---: | :---: | :---: | :------------: |
+| @table.TodoItem | id  | Uid | Tid | Title | State | TodoCurrencyID | Value |
+| :-------------: | :-: | :-: | :-: | :---: | :---: | :------------: | :---: |
