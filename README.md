@@ -20,6 +20,60 @@ WebApp
   - [ ] /user/<user_id>
 - [ ] /user/<user_id>
 
+
+#### DB Tables
+@table.CurrencyCode
+| id  | Currency |
+| :-: | :------: |
+
+@table.Users
+| id  | NickName | CurrencyCodeID |
+| :-: | :------: | :------------: |
+
+<hr />
+
+@table.Wallet
+| id  | Uid | Balance |
+| :-: | :-: | :-----: |
+
+<hr />
+
+@table.ScheduleCode
+| id  | Uid | Code |
+| :-: | :-: | :--: |
+
+@table.FuncName
+| id  | Uid | Name |
+| :-: | :-: | :--: |
+
+@table.Schedule
+| id  | Uid | Title | ScheduleCodeID | FuncNameID | Value | Wid |
+| :-: | :-: | :---: | :------------: | :--------: | :---: | :-: |
+
+<hr />
+
+@table.UserFilter
+| id  | Uid | ObjName | ObjIDs |
+| :-: | :-: | :-----: | :----: |
+
+<hr />
+
+@table.TodoCurrency
+| id  | Tid | CurrencyID | Value |
+| :-: | :-: | :--------: | :---: |
+
+@table.Todo
+| id  | Uid | Title | State | Value | TodoCurrencyID |
+| :-: | :-: | :---: | :---: | :---: | :------------: |
+
+@table.TodoItems
+| id  | Tid | Title | State | Value | TodoCurrencyID |
+| :-: | :-: | :---: | :---: | :---: | :------------: |
+
+#### User
+User will be able to add a "wallet" with its balance, so it can be updated
+
+
 #### Main
 ```
 @block nav
