@@ -9,6 +9,7 @@ WebApp
   redirect(main)
 ```
 - [ ] / - widgets, summary, navbar with data and quick links
+  - [ ] add currency
 - [ ] /auth
   - [ ] /login
   - [ ] /register
@@ -17,7 +18,7 @@ WebApp
 - [ ] /user
   - [ ] Add wallet
   - [ ] Add schedule
-  - [ ] Add fact
+  - [ ] Add todo
 
 ### Main Page
 ```
@@ -124,8 +125,8 @@ $todo - body
 | @table.TodoCurrency | id  | Tid | CurrencyID | Value |
 | :-----------------: | :-: | :-: | :--------: | :---: |
 
-| @table.Todo | id  | Uid | Title | State | TodoCurrencyID | Value |
-| :---------: | :-: | :-: | :---: | :---: | :------------: | :---: |
+| @table.Todo | id  | Uid | Title | State | TodoCurrencyID | Value | DateTime |
+| :---------: | :-: | :-: | :---: | :---: | :------------: | :---: | :------: |
 
-| @table.TodoItem | id  | Uid | Tid | Title | State | TodoCurrencyID | Value |
-| :-------------: | :-: | :-: | :-: | :---: | :---: | :------------: | :---: |
+| @table.TodoItem | id  | Uid | Tid | Title | State | TodoCurrencyID | Value | DateTime |
+| :-------------: | :-: | :-: | :-: | :---: | :---: | :------------: | :---: | :------: |
