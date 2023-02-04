@@ -125,8 +125,8 @@ $todo - body
 | @table.TodoCurrency | id  | Tid | CurrencyID | Value |
 | :-----------------: | :-: | :-: | :--------: | :---: |
 
-| @table.Todo | id  | Uid | Title | State | TodoCurrencyID | Value | DateTime |
+| @table.Todo | id  | Uid | Title | State | TodoCurrencyID | Value | Created_at |
 | :---------: | :-: | :-: | :---: | :---: | :------------: | :---: | :------: |
 
-| @table.TodoItem | id  | Uid | Tid | Title | State | TodoCurrencyID | Value | DateTime |
+| @table.TodoItem | id  | Uid | Tid | Title | State | TodoCurrencyID | Value | Created_at |
 | :-------------: | :-: | :-: | :-: | :---: | :---: | :------------: | :---: | :------: |

@@ -165,7 +165,8 @@ class Todo:
         title VARCHAR(50),
         state BOOLEAN,
         todo_currency_id INTEGER,
-        value DECIMAL(10, 2)
+        value DECIMAL(10, 2),
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
       )
       """
     )
@@ -180,7 +181,8 @@ class Todo:
         title VARCHAR(50),
         state BOOLEAN,
         todo_currency_id INTEGER,
-        value DECIMAL(10, 2)
+        value DECIMAL(10, 2),
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
       )
       """
     )
