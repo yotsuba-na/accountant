@@ -1,7 +1,7 @@
 # Accountant
-Logging the income and outcome money
+Logging the fact and scheduled spend to/from a wallet
 
-#### Routes
+### Todo
 ```
 WebApp
   if not is_logged:
@@ -14,67 +14,12 @@ WebApp
   - [ ] /register
   - [ ] /reset
   - [ ] /confirm
-- [ ] /finance
-  - [ ] /user/<user_id>
-- [ ] /crud - main crud page for all users to vote ?!
-  - [ ] /user/<user_id>
-- [ ] /user/<user_id>
+- [ ] /user
+  - [ ] Add wallet
+  - [ ] Add schedule
+  - [ ] Add fact
 
-
-#### DB Tables
-@table.CurrencyCode
-| id  | Currency |
-| :-: | :------: |
-
-@table.Users
-| id  | NickName | CurrencyCodeID |
-| :-: | :------: | :------------: |
-
-<hr />
-
-@table.Wallet
-| id  | Uid | Balance |
-| :-: | :-: | :-----: |
-
-<hr />
-
-@table.ScheduleCode
-| id  | Uid | Code |
-| :-: | :-: | :--: |
-
-@table.FuncName
-| id  | Uid | Name |
-| :-: | :-: | :--: |
-
-@table.Schedule
-| id  | Uid | Title | ScheduleCodeID | FuncNameID | Value | Wid |
-| :-: | :-: | :---: | :------------: | :--------: | :---: | :-: |
-
-<hr />
-
-@table.UserFilter
-| id  | Uid | ObjName | ObjIDs |
-| :-: | :-: | :-----: | :----: |
-
-<hr />
-
-@table.TodoCurrency
-| id  | Tid | CurrencyID | Value |
-| :-: | :-: | :--------: | :---: |
-
-@table.Todo
-| id  | Uid | Title | State | Value | TodoCurrencyID |
-| :-: | :-: | :---: | :---: | :---: | :------------: |
-
-@table.TodoItems
-| id  | Tid | Title | State | Value | TodoCurrencyID |
-| :-: | :-: | :---: | :---: | :---: | :------------: |
-
-#### User
-User will be able to add a "wallet" with its balance, so it can be updated
-
-
-#### Main
+### Main Page
 ```
 @block nav
 +---------+    +--------------------------------------------+    +-----------------------+
@@ -145,3 +90,42 @@ $todo - body
 
 %scroll - scrollable data
 ```
+
+### DB Tables
+| @table.CurrencyCode | id  | Currency |
+| :-----------------: | :-: | :------: |
+
+| @table.Users | id  | NickName | CurrencyCodeID |
+| :----------: | :-: | :------: | :------------: |
+
+<hr />
+
+| @table.Wallet | id  | Uid | Balance | Shared |
+| :-----------: | :-: | :-: | :-----: | :----: |
+
+<hr />
+
+| @table.ScheduleCode | id  | Uid | Code |
+| :-----------------: | :-: | :-: | :--: |
+
+| @table.FuncName | id  | Uid | Name |
+| :-------------: | :-: | :-: | :--: |
+
+| @table.Schedule | id  | Uid | Title | ScheduleCodeID | FuncNameID | Value | Wid |
+| :-------------: | :-: | :-: | :---: | :------------: | :--------: | :---: | :-: |
+
+<hr />
+
+| @table.Filters | id  | Uid | ObjName | ObjIDs |
+| :------------: | :-: | :-: | :-----: | :----: |
+
+<hr />
+
+| @table.TodoCurrency | id  | Tid | CurrencyID | Value |
+| :-----------------: | :-: | :-: | :--------: | :---: |
+
+| @table.Todo | id  | Uid | Title | State | Value | TodoCurrencyID |
+| :---------: | :-: | :-: | :---: | :---: | :---: | :------------: |
+
+| @table.TodoItems | id  | Tid | Title | State | Value | TodoCurrencyID |
+| :--------------: | :-: | :-: | :---: | :---: | :---: | :------------: |
