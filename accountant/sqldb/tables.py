@@ -1,5 +1,6 @@
 import sqlite3
 from os.path import join
+import os
 
 from flask import url_for
 
@@ -198,7 +199,11 @@ class Todo:
 
 
 def get_db_path(app):
-  return join(app.root_path, 'static', 'accountant', 'db.sqlite3')
+    file = 'db.sqlite3'
+    path = join(app.root_path, 'static', 'accountant')
+    os.makedirs(path, exist_ok=True)
+
+    return join(path, file)
 
 
 def db_create_all(app):
