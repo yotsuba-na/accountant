@@ -8,20 +8,22 @@ class Currency:
   def __init__(self, conn):
     self.conn = conn
 
-  def currency_code(self):
+  def currency(self):
     """USD, CNY, JPY, RUB
     """
     self.conn.execute(
       """
-      CREATE TABLE IF NOT EXISTS currency_code (
+      CREATE TABLE IF NOT EXISTS currency (
         id INTEGER,
-        currency VARCHAR(10)
+        currency VARCHAR(10),
+        value DECIMAL(10, 2),
+        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
       )
       """
     )
 
   def create_all(self):
-    self.currency_code()
+    self.currency()
 
     self.conn.commit()
 
@@ -36,7 +38,7 @@ class User:
       CREATE TABLE IF NOT EXISTS user (
         id INTEGER,
         nickname VARCHAR(50),
-        currency_code_id INTEGER
+        currency_id INTEGER
       )
       """
     )

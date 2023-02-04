@@ -93,10 +93,10 @@ $todo - body
 ```
 
 ### DB Tables
-| @table.CurrencyCode | id  | Currency |
-| :-----------------: | :-: | :------: |
+| @table.Currency | id  | Currency | Value | Updated_at |
+| :-------------: | :-: | :------: | :---: | :--------: |
 
-| @table.Users | id  | NickName | CurrencyCodeID |
+| @table.Users | id  | NickName | CurrencyID |
 | :----------: | :-: | :------: | :------------: |
 
 <hr />
