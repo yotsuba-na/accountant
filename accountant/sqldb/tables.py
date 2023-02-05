@@ -26,8 +26,6 @@ class Currency:
   def create_all(self):
     self.currency()
 
-    self.conn.commit()
-
 
 class User:
   def __init__(self, conn):
@@ -46,8 +44,6 @@ class User:
 
   def create_all(self):
     self.user()
-
-    self.conn.commit()
 
 
 class Wallet:
@@ -68,8 +64,6 @@ class Wallet:
 
   def create_all(self):
     self.wallet()
-
-    self.conn.commit()
 
 
 class Scheduled:
@@ -118,8 +112,6 @@ class Scheduled:
     self.func_code()
     self.schedule()
 
-    self.conn.commit()
-
 
 class Filters:
   def __init__(self, conn):
@@ -139,8 +131,6 @@ class Filters:
 
   def create_all(self):
     self.filters()
-
-    self.conn.commit()
 
 
 class Todo:
@@ -195,8 +185,6 @@ class Todo:
     self.todo()
     self.todo_item()
 
-    self.conn.commit()
-
 
 def get_db_path(app):
     file = 'db.sqlite3'
@@ -207,10 +195,12 @@ def get_db_path(app):
 
 
 def db_create_all(app):
-  with sqlite3.connect(get_db_path(app)) as conn:
-    Currency(conn).create_all()
-    User(conn).create_all()
-    Wallet(conn).create_all()
-    Scheduled(conn).create_all()
-    Filters(conn).create_all()
-    Todo(conn).create_all()
+    with sqlite3.connect(get_db_path(app)) as conn:
+        cur = conn.cursor()
+        Currency(cur).create_all()
+        User(cur).create_all()
+        Wallet(cur).create_all()
+        Scheduled(cur).create_all()
+        Filters(cur).create_all()
+        Todo(cur).create_all()
+        conn.commit()
