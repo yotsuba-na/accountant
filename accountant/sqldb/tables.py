@@ -9,13 +9,13 @@ __all__ = ('db_create_all', 'get_db_path')
 
 
 class Currency:
-  def __init__(self, conn):
-    self.conn = conn
+  def __init__(self, curr):
+    self.curr = curr
 
   def currency(self):
     """USD, CNY, JPY, RUB
     """
-    self.conn.execute(
+    self.curr.execute(
       """
       CREATE TABLE IF NOT EXISTS currency (
         id INTEGER,
@@ -31,11 +31,11 @@ class Currency:
 
 
 class User:
-  def __init__(self, conn):
-    self.conn = conn
+  def __init__(self, curr):
+    self.curr = curr
 
   def user(self):
-    self.conn.execute(
+    self.curr.execute(
       """
       CREATE TABLE IF NOT EXISTS user (
         id INTEGER,
@@ -50,11 +50,11 @@ class User:
 
 
 class Wallet:
-  def __init__(self, conn):
-    self.conn = conn
+  def __init__(self, curr):
+    self.curr = curr
 
   def wallet(self):
-    self.conn.execute(
+    self.curr.execute(
       """
       CREATE TABLE IF NOT EXISTS wallet (
         id INTEGER,
@@ -70,11 +70,11 @@ class Wallet:
 
 
 class Scheduled:
-  def __init__(self, conn):
-    self.conn = conn
+  def __init__(self, curr):
+    self.curr = curr
 
   def schedule_code(self):
-    self.conn.execute(
+    self.curr.execute(
       """
       CREATE TABLE IF NOT EXISTS schedule_code (
         id INTEGER,
@@ -85,7 +85,7 @@ class Scheduled:
     )
 
   def func_code(self):
-    self.conn.execute(
+    self.curr.execute(
       """
       CREATE TABLE IF NOT EXISTS func_code (
         id INTEGER,
@@ -96,7 +96,7 @@ class Scheduled:
     )
 
   def schedule(self):
-    self.conn.execute(
+    self.curr.execute(
       """
       CREATE TABLE IF NOT EXISTS schedule (
         id INTEGER,
@@ -117,11 +117,11 @@ class Scheduled:
 
 
 class Filters:
-  def __init__(self, conn):
-    self.conn = conn
+  def __init__(self, curr):
+    self.curr = curr
 
   def filters(self):
-    self.conn.execute(
+    self.curr.execute(
       """
       CREATE TABLE IF NOT EXISTS filters (
         id INTEGER,
@@ -137,11 +137,11 @@ class Filters:
 
 
 class Todo:
-  def __init__(self, conn):
-    self.conn = conn
+  def __init__(self, curr):
+    self.curr = curr
 
   def todo_currency(self):
-    self.conn.execute(
+    self.curr.execute(
       """
       CREATE TABLE IF NOT EXISTS todo_currency (
         id INTEGER,
@@ -153,7 +153,7 @@ class Todo:
     )
 
   def todo(self):
-    self.conn.execute(
+    self.curr.execute(
       """
       CREATE TABLE IF NOT EXISTS todo (
         id INTEGER,
@@ -168,7 +168,7 @@ class Todo:
     )
 
   def todo_item(self):
-    self.conn.execute(
+    self.curr.execute(
       """
       CREATE TABLE IF NOT EXISTS todo_item (
         id INTEGER,
@@ -198,12 +198,14 @@ def get_db_path(app):
 
 
 def db_create_all(app):
-    with sqlite3.connect(get_db_path(app)) as conn:
-        cur = conn.cursor()
-        Currency(cur).create_all()
-        User(cur).create_all()
-        Wallet(cur).create_all()
-        Scheduled(cur).create_all()
-        Filters(cur).create_all()
-        Todo(cur).create_all()
-        conn.commit()
+    with sqlite3.currect(get_db_path(app)) as conn:
+        curr = curr.cursor()
+
+        Currency(curr).create_all()
+        User(curr).create_all()
+        Wallet(curr).create_all()
+        Scheduled(curr).create_all()
+        Filters(curr).create_all()
+        Todo(curr).create_all()
+
+        curr.commit()
