@@ -11,11 +11,12 @@ app = Flask(
 )
 
 
+# main path instead of app
 if __name__ == '__main__':
   with app.app_context():
     app.register_blueprint(main)
     app.register_blueprint(user)
 
-    db_create_all(app)
+    db_create_all(main)
 
   app.run(debug=True)
