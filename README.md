@@ -93,40 +93,53 @@ $todo - body
 ```
 
 ### DB Tables
-| @table.Currency | id  | Currency | Value | Updated_at |
+| @table.currency | id  | currency | value | updated_at |
 | :-------------: | :-: | :------: | :---: | :--------: |
+|                 |  1  |    USD   |  0.45 | timestamp  |
+|                 |  2  |    JPY   |  0.20 | timestamp  |
 
-| @table.Users | id  | NickName | CurrencyID |
-| :----------: | :-: | :------: | :------------: |
-
-<hr />
-
-| @table.Wallet | id  | Uid | Balance | Shared |
-| :-----------: | :-: | :-: | :-----: | :----: |
+| @table.users | id  | nickname | currency_id |
+| :----------: | :-: | :------: | :---------: |
+|              |  1  |  noName  |      1      |
 
 <hr />
 
-| @table.ScheduleCode | id  | Uid | Code |
-| :-----------------: | :-: | :-: | :--: |
-
-| @table.FuncCode | id  | Uid | Code |
-| :-------------: | :-: | :-: | :--: |
-
-| @table.Schedule | id  | Uid | Title | ScheduleCodeID | FuncCodeID | Value | Wid |
-| :-------------: | :-: | :-: | :---: | :------------: | :--------: | :---: | :-: |
+| @table.wallet | id  | u_id | balance | shared |
+| :-----------: | :-: | :--: | :-----: | :----: |
+|               |  1  |  1   |  32.49  | false  |
 
 <hr />
 
-| @table.Filters | id  | Uid | ObjName | ObjIDs |
-| :------------: | :-: | :-: | :-----: | :----: |
+| @table.schedule_code | id  | code |
+| :------------------: | :-: | :--: |
+|                      |  1  |   d  |
+|                      |  2  |   m  |
+
+| @table.func_code | id  | u_id | code |
+| :--------------: | :-: | :--: | :--: |
+|                  |  1  |  1   | inc  |
+
+| @table.schedule | id  | u_id | title | schedule_code_id | schedule_repeat | func_code_id | value | w_id |
+| :-------------: | :-: | :--: | :---: | :--------------: | :-------------: | :----------: | :---: | :--: |
+|                 |  1  |  1   | daily |         1        |        *        |       1      |  0.5  |  1   |
 
 <hr />
 
-| @table.TodoCurrency | id  | Tid | CurrencyID | Value |
-| :-----------------: | :-: | :-: | :--------: | :---: |
+| @table.filters | id  | u_id | obj_name | obj_ids |
+| :------------: | :-: | :--: | :------: | :-----: |
+|                |  1  |  1   |  Users   | 1,2,3   |
 
-| @table.Todo | id  | Uid | Title | State | TodoCurrencyID | Value | Created_at |
-| :---------: | :-: | :-: | :---: | :---: | :------------: | :---: | :------: |
+<hr />
 
-| @table.TodoItem | id  | Uid | Tid | Title | State | TodoCurrencyID | Value | Created_at |
-| :-------------: | :-: | :-: | :-: | :---: | :---: | :------------: | :---: | :------: |
+| @table.todo_currency | id  | t_id | currency_id | Value |
+| :------------------: | :-: | :--: | :---------: | :---: |
+|                      |  1  |   1  |      1      | 0.40  |
+
+| @table.todo | id  | u_id | title | State | todo_currency_id | value | created_at |
+| :---------: | :-: | :--: | :---: | :---: | :--------------: | :---: | :--------: |
+|             |  1  |  1   | my td |   0   |         1        | 10.00 | timestamp  |
+
+| @table.todo_item | id  | u_id | t_id | title | state | todo_currency_id | value | created_at |
+| :--------------: | :-: | :--: | :--: | :---: | :---: | :--------------: | :---: | :--------: |
+|                  |  1  |  1   |  1   | my t  |   0   |         1        |  5.0  | timestamp  |
+|                  |  2  |  1   |  1   | my d  |   0   |         1        |  5.0  | timestamp  |
