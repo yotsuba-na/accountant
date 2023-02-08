@@ -61,10 +61,15 @@
     <div class="dynamic">
 
       <div class="left">
-        <div class="user">
-          <p class="userName"><span>ccl</span> Name</p>
-          <p class="userSummary">13 R</p>
-        </div>
+        {% for user in all_users %}
+          <div class="user">
+            <p class="userName">
+              <input id="user_{{ user[0] }}" type="checkbox" />
+              <label for="user_{{ user[0] }}">User[1]</label>
+            </p>
+            <p class="userSummary">13 R</p>
+          </div>
+        {% endfor %}
       </div>
 
       <div class="middle">
@@ -72,10 +77,13 @@
         </div>
         <div class="notIncome">
         </div>
-        <div class="todo">
-          <div class="active">
+        <div class="todos">
+          <div class="todo">
+            {% for todo in all_todos %}
+              <p>{{ todo }}</p>
+            {% endfor %}
           </div>
-          <div class="notActive">
+          <div class="todoItems">
           </div>
         </div>
       </div>
