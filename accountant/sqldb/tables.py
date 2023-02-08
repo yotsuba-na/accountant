@@ -198,8 +198,8 @@ def get_db_path(app):
 
 
 def db_create_all(app):
-    with sqlite3.currect(get_db_path(app)) as conn:
-        curr = curr.cursor()
+    with sqlite3.connect(get_db_path(app)) as conn:
+        curr = conn.cursor()
 
         Currency(curr).create_all()
         User(curr).create_all()
@@ -208,4 +208,4 @@ def db_create_all(app):
         Filters(curr).create_all()
         Todo(curr).create_all()
 
-        curr.commit()
+        conn.commit()

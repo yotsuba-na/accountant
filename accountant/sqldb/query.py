@@ -10,7 +10,7 @@ class User:
   def __init__(self, curr):
     self.curr = curr
 
-  def get_all(self, by_ids: list[int] | None) -> list:
+  def get_all(self, by_ids: list[int] | None = None) -> list:
     query = 'SELECT * FROM user'
 
     if by_ids is not None:
@@ -19,7 +19,7 @@ class User:
     return self.curr.execute(query).fetchall()
 
 
-class Filters:
+class Filter:
   """Query for `filters` table
   """
   def __init__(self, curr):
@@ -28,9 +28,9 @@ class Filters:
   def get_user_filter(self, user_id: int, obj_name: str) -> list:
     """Gets user filter for `obj_name` table
     """
-    obj_ids = self.execute(
+    obj_ids = self.curr.execute(
       f"""
-      SELECT obj_ids FROM filters WHERE uid={user_id} AND obj_name={obj_name}
+      SELECT obj_ids FROM filters WHERE uid={user_id} AND obj_name='{obj_name}'
       """
     ).fetchone()
 
@@ -46,7 +46,7 @@ class Schedules:
   def __init__(self, curr):
     self.curr = curr
 
-  def get_users_schedules(self, users_id: list[int] | None):
+  def get_users_schedules(self, users_id: list[int] | None = None):
     """Users schedules
     """
     query = "SELECT * FROM schedule"
@@ -63,12 +63,42 @@ class Todo:
   def __init__(self, curr):
     self.curr = curr
 
-  def get_users_todo(self, users_id: list[int] | None):
+  def get_users_todo(self, users_id: list[int] | None = None):
     """Users todo
     """
     query = "SELECT * FROM todo"
 
     if users_id is not None:
       query += f" WHERE u_id IN {list_to_query_str(users_id)}"
+
+    return self.curr.execute(query).fetchall()
+
+
+class Currency:
+  """Query for `currency` table
+  """
+  def __init__(self, curr):
+    self.curr = curr
+
+  def get_all(self, by_ids: list[int] | None = None) -> list:
+    query = 'SELECT * FROM currency'
+
+    if by_ids is not None:
+      query += f" WHERE id IN {list_to_query_str(by_ids)}"
+
+    return self.curr.execute(query).fetchall()
+
+
+class Wallet:
+  """Query for `wallet` table
+  """
+  def __init__(self, curr):
+    self.curr = curr
+
+  def get_all(self, by_ids: list[int] | None = None) -> list:
+    query = 'SELECT * FROM wallet'
+
+    if by_ids is not None:
+      query += f" WHERE id IN {list_to_query_str(by_ids)}"
 
     return self.curr.execute(query).fetchall()
