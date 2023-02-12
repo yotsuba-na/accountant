@@ -15,17 +15,52 @@
     <div class="nav">
       <div class="filter">
         <select>
-          <option>a</option>
+          <option>2022-11-01</option>
+          <option>2022-12-01</option>
+        </select>
+        <select>
+          <option>Only</option>
+          <option>All</option>
         </select>
       </div>
       <div class="summary">
-        <div class="filtered">
-          <span>119 S</span>
-          <span>119 G</span>
-          <span>119 R</span>
+        <div class="whole">
+          <div class="valueView">
+            <input type="checkbox">
+            <div>
+              <span class="valueIn">444 USD</span><br />
+              <span class="valueOut">233 USD</span>
+            </div>
+          </div>
         </div>
-        <div class="notFiltered">
-          <span>1109 R</span>
+        <div class="monthStart">
+          <div class="valueView">
+            <input type="checkbox">
+            <div>
+              <span class="valueIn">444 USD</span><br />
+              <span class="valueOut">233 USD</span>
+            </div>
+          </div>
+        </div>
+        <div class="current">
+          <div class="valueView">
+            <input type="checkbox">
+            <div>
+              <span class="valueIn">444 RUB</span><br />
+              <span class="valueOut">233 RUB</span>
+            </div>
+          </div>
+          <div class="valueView">
+            <input type="checkbox">
+            <div>
+              <span class="valueIn">444 JPY</span><br />
+              <span class="valueOut">233 JPY</span>
+            </div>
+          </div>
+        </div>
+        <div class="addCurrency">
+          <input placeholder="Currency Cod"></input>
+          <button>Btn</button>
         </div>
       </div>
     </div>
@@ -33,6 +68,14 @@
     <div class="dynamic">
 
       <div class="left">
+        <div class="userView">
+          <input type="checkbox">
+          <div>
+            <span class="userName">User_1</span><br />
+            <span class="valueIn">444 USD</span><br />
+            <span class="valueOut">233 USD</span>
+          </div>
+        </div>
         {% for user in all_users %}
           <div class="user">
             <p class="userName">
@@ -46,16 +89,43 @@
 
       <div class="middle">
         <div class="income">
+
+          <div class="scheduleView">
+            <input type="checkbox">
+            <div>
+              <span class="scheduleName">It's monthly ?</span><br />
+              <span class="valueIn">444 USD</span>
+              <span class="scheduleRepeat">/mo</span>
+            </div>
+          </div>
+
         </div>
+
+        <hr />
+
         <div class="notIncome">
+
+          <div class="scheduleView">
+            <input type="checkbox">
+            <div>
+              <span class="scheduleName">It's monthly ?</span><br />
+              <span class="valueOut">444 USD</span>
+              <span class="scheduleRepeat">/mo</span>
+            </div>
+          </div>
+
         </div>
         <div class="todos">
           <div class="todo">
+            <p>User_1 :: 2022-12-12</p>
             {% for todo in all_todos %}
               <p>{{ todo }}</p>
             {% endfor %}
           </div>
           <div class="todoItems">
+            <p>foo
+              <span>223 USD</span>
+            </p>
           </div>
         </div>
       </div>
@@ -71,6 +141,18 @@
             <tr>
           </thead>
           <tbody>
+            <tr>
+              <td>2</td>
+              <td>User_1</td>
+              <td><span class="valueOut">223 USD</span></td>
+              <td>2022-12-12 15:22:23</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>User_1</td>
+              <td><span class="valueIn">444 USD</span></td>
+              <td>2022-12-12 12:22:23</td>
+            </tr>
           </tbody>
         </table>
       </div>

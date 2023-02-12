@@ -25,3 +25,34 @@
   grid-row: 1;
   grid-column: 10 / 12;
 }
+
+.summary {
+  display: flex;
+}
+.current {
+  display: flex;
+}
+
+.valueView {
+  display: flex;
+}
+.valueIn {
+  color: green;
+}
+.valueOut {
+  color: red;
+}
+
+
+.userView {
+  display: flex;
+}
+
+
+.scheduleView {
+  display: flex;
+}
+
+.todos {
+  display: flex;
+}
