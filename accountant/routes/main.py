@@ -1,7 +1,9 @@
 import sqlite3
 from accountant.sqldb import tables, query
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request
 
+# XXX: VOCABULARY
+# us2 = user subscribed to
 
 app = Blueprint('main', __name__, url_prefix='/', static_folder='static')
 
@@ -10,12 +12,12 @@ def current_logged_user():
     return 1
 
 
-@app.route('/', methods=['GET'])
+@app.route('/', methods=['GET', 'POST'])
 def index():
   current_user = current_logged_user()
+  if request.method == 'POST':
+    main_form_data = request.form.get("mainFormData")
 
-  # XXX: VOCABULARY
-  # us2 = user subscribed to
   with sqlite3.connect(tables.get_db_path(app)) as conn:
     curr = conn.cursor()
 

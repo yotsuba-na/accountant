@@ -24,7 +24,7 @@ WebApp
 ```
 @block nav
 +---------+    +-------------+------+-----+------+----------+    +-----------------------+
-| $filter |    | $currencies < *[@] | $dd < *[@] |          |    | $summary_not_filtered |
+| $filter |    | $currencies < *[@] | $dd < *[@] | $SubForm |    | $summary_not_filtered |
 +---------+    +-------------+------+-----+------+----------+    +-----------------------+
 
 
@@ -50,6 +50,8 @@ $filter
 $c - currency
 
 $dd - drop down (selection)
+
+$subForm - form to submit a data
 
 $summary_? (in/out)
 +---------+
