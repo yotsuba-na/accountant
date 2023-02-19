@@ -43,9 +43,9 @@ WebApp
 
 
 $filter
-+-----------+---------+
-| date_from | date_to | - default this.month
-+-----------+---------+
++------+----------+
+| date | All/Only | - All data, Only for this $date
++------+----------+
 
 $c - currency
 
