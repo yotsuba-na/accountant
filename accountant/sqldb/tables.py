@@ -189,16 +189,8 @@ class Todo:
     self.todo_item()
 
 
-def get_db_path(app):
-    file = 'db.sqlite3'
-    path = join(app.root_path, 'static', 'accountant')
-    os.makedirs(path, exist_ok=True)
-
-    return join(path, file)
-
-
-def db_create_all(app):
-    with sqlite3.connect(get_db_path(app)) as conn:
+def db_create_all(DB_FILEPATH):
+    with sqlite3.connect(DB_FILEPATH) as conn:
         curr = conn.cursor()
 
         Currency(curr).create_all()
