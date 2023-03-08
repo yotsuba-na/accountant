@@ -25,51 +25,35 @@ class Filter:
   def __init__(self, curr):
     self.curr = curr
 
-  def get_user_filter(self, user_id: int, obj_name: str) -> list:
+  def get(self, user_id: int, obj_name: str) -> list:
     """Gets user filter for `obj_name` table
     """
     obj_ids = self.curr.execute(
       f"""
-      SELECT obj_ids FROM filters WHERE uid={user_id} AND obj_name='{obj_name}'
+      SELECT obj_ids FROM filters
+      WHERE owner_id={user_id} AND obj_name='{obj_name}'
       """
     ).fetchone()
 
     if obj_ids is not None:
-      obj_ids = list(map(int, objids.split(',')))
+      obj_ids = list(map(int, obj_ids.split(',')))
 
     return obj_ids
 
 
-class Schedules:
-  """Query for `schedules` table
+class Transaction:
+  """Query for `transaction` table
   """
   def __init__(self, curr):
     self.curr = curr
 
-  def get_users_schedules(self, users_id: list[int] | None = None):
+  def get_all(self, users_id: list[int] | None = None):
     """Users schedules
     """
-    query = "SELECT * FROM schedule"
+    query = "SELECT * FROM `transaction`"
 
     if users_id is not None:
-      query += f" WHERE u_id IN {list_to_query_str(users_id)}"
-
-    return self.curr.execute(query).fetchall()
-
-
-class Todo:
-  """Query for `todo` table
-  """
-  def __init__(self, curr):
-    self.curr = curr
-
-  def get_users_todo(self, users_id: list[int] | None = None):
-    """Users todo
-    """
-    query = "SELECT * FROM todo"
-
-    if users_id is not None:
-      query += f" WHERE u_id IN {list_to_query_str(users_id)}"
+      query += f" WHERE owner_id IN {list_to_query_str(users_id)}"
 
     return self.curr.execute(query).fetchall()
 

@@ -70,24 +70,26 @@
 
     <div class="dynamic">
 
-      <div class="left">
-        <div class="userView">
-          <input type="checkbox">
-          <div>
-            <span class="userName">User_1</span><br />
-            <span class="valueIn">444 USD</span><br />
-            <span class="valueOut">233 USD</span>
-          </div>
+      <div class="tabs left">
+
+        <div class="tab users">
+          {% for user in all_users %}
+            <div class="userView">
+              <input type="checkbox">
+              <div>
+                <span class="userName">{{ user[1] }}</span><br />
+                <div class="valueView_1">
+                  <span class="valueIn">444 USD</span><br />
+                  <span class="valueOut">233 USD</span>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
         </div>
-        {% for user in all_users %}
-          <div class="user">
-            <p class="userName">
-              <input id="user_{{ user[0] }}" type="checkbox" />
-              <label for="user_{{ user[0] }}">User[1]</label>
-            </p>
-            <p class="userSummary">13 R</p>
-          </div>
-        {% endfor %}
+
+        <div class="tab wallets">
+        </div>
+
       </div>
 
       <div class="middle">

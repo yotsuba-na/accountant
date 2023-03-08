@@ -1,9 +1,14 @@
 import sqlite3
-from accountant.sqldb import tables, query
+
 from flask import Blueprint, render_template, request
+
+from config import DB
+from accountant.sqldb import tables, query
+
 
 # XXX: VOCABULARY
 # us2 = user subscribed to
+
 
 app = Blueprint('main', __name__, url_prefix='/', static_folder='static')
 
@@ -18,22 +23,15 @@ def index():
   if request.method == 'POST':
     main_form_data = request.form.get("mainFormData")
 
-  with sqlite3.connect(tables.get_db_path(app)) as conn:
+  with sqlite3.connect(DB.FILEPATH) as conn:
     curr = conn.cursor()
 
-    us2_users = query.Filter(curr).get_user_filter(
-      current_user, 'user'
-    )
+    us2_users = query.Filter(curr).get(user_id=current_user, obj_name='user')
     all_users = query.User(curr).get_all()
-    users_schedules = query.Schedules(curr).get_users_schedules(
-      us2_users
-    )
-    users_todos = query.Todo(curr).get_users_todo(
-      us2_users
-    )
+    users_transactions = query.Transaction(curr).get_all(users_id=us2_users)
     all_currencies = query.Currency(curr).get_all()
-    us2_currencies = query.Filter(curr).get_user_filter(
-      current_user, 'currency'
+    us2_currencies = query.Filter(curr).get(
+      user_id=current_user, obj_name='currency'
     )
     all_wallets = query.Wallet(curr).get_all()
 
@@ -41,8 +39,7 @@ def index():
     'main.html',
     us2_users=us2_users,
     all_users=all_users,
-    users_schedules=users_schedules,
-    users_todos=users_todos,
+    users_transactions=users_transactions,
     all_currencies=all_currencies,
     us2_currencies=us2_currencies,
     all_wallets=all_wallets

@@ -36,6 +36,9 @@
 .valueView {
   display: flex;
 }
+.valueView_1 {
+  display: block;
+}
 .valueIn {
   color: green;
 }
