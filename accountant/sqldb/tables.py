@@ -8,26 +8,78 @@ from flask import url_for
 __all__ = ('db_create_all', 'get_db_path')
 
 
-class Currency:
+class Transaction:
   def __init__(self, curr):
     self.curr = curr
 
-  def currency(self):
-    """USD, CNY, JPY, RUB
-    """
+  def transaction(self):
     self.curr.execute(
       """
-      CREATE TABLE IF NOT EXISTS currency (
-        id INTEGER,
-        currency VARCHAR(10),
-        value DECIMAL(10, 2),
-        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+      CREATE TABLE IF NOT EXISTS `transaction` (
+        id          INTEGER,
+        owner_id    INTEGER,
+        parent_id   INTEGER,
+        title       VARCHAR (50),
+        type_id     INTEGER,
+        function_id INTEGER,
+        wallet_id   INTEGER,
+        currency_id INTEGER,
+        value       DECIMAL (10, 2),
+        created_at  DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updated_at  DATETIME
+      )
+      """
+    )
+
+  def transaction_type(self):
+    # types: {'planned', 'fact', 'scheduled', 'transfer'}
+    self.curr.execute(
+      """
+      CREATE TABLE IF NOT EXISTS transaction_type (
+        id          INTEGER,
+        type        VARCHAR (10) NOT NULL
+      )
+      """
+    )
+
+  def transaction_function(self):
+    # funcs: {'increment', 'decrement'}
+    self.curr.execute(
+      """
+      CREATE TABLE IF NOT EXISTS transaction_function (
+        id          INTEGER,
+        func        VARCHAR (10) NOT NULL
       )
       """
     )
 
   def create_all(self):
-    self.currency()
+    self.transaction()
+    self.transaction_type()
+    self.transaction_function()
+
+
+class TransactionTransfer:
+  def __init__(self, curr):
+    self.curr = curr
+
+  def transaction_transfer(self):
+    # obj_names: {'user', 'currency'}
+    self.curr.execute(
+      """
+      CREATE TABLE IF NOT EXISTS transaction_transfer (
+        id            INTEGER,
+        owner_id      INTEGER,
+        transfer_from INTEGER,
+        transfer_to   INTEGER,
+        currency_id   INTEGER,
+        value         DECIMAL (10, 2) NOT NULL
+      )
+      """
+    )
+
+  def create_all(self):
+    self.transaction_transfer()
 
 
 class User:
@@ -38,8 +90,8 @@ class User:
     self.curr.execute(
       """
       CREATE TABLE IF NOT EXISTS user (
-        id INTEGER,
-        nickname VARCHAR(50),
+        id          INTEGER,
+        fullname    VARCHAR(50),
         currency_id INTEGER
       )
       """
@@ -47,6 +99,29 @@ class User:
 
   def create_all(self):
     self.user()
+
+
+class Currency:
+  def __init__(self, curr):
+    self.curr = curr
+
+  def currency(self):
+    """USD, CNY, JPY, RUB
+    """
+    self.curr.execute(
+      """
+      CREATE TABLE IF NOT EXISTS currency (
+        id          INTEGER,
+        currency    VARCHAR (10),
+        value       DECIMAL (10, 2),
+        created_at  DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updated_at
+      )
+      """
+    )
+
+  def create_all(self):
+    self.currency()
 
 
 class Wallet:
@@ -57,63 +132,28 @@ class Wallet:
     self.curr.execute(
       """
       CREATE TABLE IF NOT EXISTS wallet (
-        id INTEGER,
-        uid SMALLINT,
-        balance DECIMAL(10, 2),
-        shared BOOLEAN
+        id          INTEGER,
+        owner_id    INTEGER,
+        balance     DECIMAL(10, 2),
+        type_id     INTEGER
+      )
+      """
+    )
+
+  def wallet_type(self):
+    # types: {'linked', 'shared', 'temporary'}
+    self.curr.execute(
+      """
+      CREATE TABLE IF NOT EXISTS wallet_type (
+        id          INTEGER,
+        type        VARCHAR (10)
       )
       """
     )
 
   def create_all(self):
     self.wallet()
-
-
-class Scheduled:
-  def __init__(self, curr):
-    self.curr = curr
-
-  def schedule_code(self):
-    self.curr.execute(
-      """
-      CREATE TABLE IF NOT EXISTS schedule_code (
-        id INTEGER,
-        uid SMALLINT,
-        code VARCHAR(10)
-      )
-      """
-    )
-
-  def func_code(self):
-    self.curr.execute(
-      """
-      CREATE TABLE IF NOT EXISTS func_code (
-        id INTEGER,
-        uid SMALLINT,
-        code VARCHAR(10)
-      )
-      """
-    )
-
-  def schedule(self):
-    self.curr.execute(
-      """
-      CREATE TABLE IF NOT EXISTS schedule (
-        id INTEGER,
-        uid SMALLINT,
-        title VARCHAR(50),
-        schedule_code_id SMALLINT,
-        func_code_id SMALLINT,
-        value DECIDMAL(10, 2),
-        wid SMALLINT
-      )
-      """
-    )
-
-  def create_all(self):
-    self.schedule_code()
-    self.func_code()
-    self.schedule()
+    self.wallet_type()
 
 
 class Filters:
@@ -121,13 +161,14 @@ class Filters:
     self.curr = curr
 
   def filters(self):
+    # obj_names: {'user', 'currency'}
     self.curr.execute(
       """
       CREATE TABLE IF NOT EXISTS filters (
-        id INTEGER,
-        uid SMALLINT,
-        obj_name VARCHAR(30),
-        obj_ids VARCHAR(50)
+        id          INTEGER,
+        owner_id    INTEGER,
+        obj_name    VARCHAR (10),
+        obj_ids     TEXT NOT NULL
       )
       """
     )
@@ -136,68 +177,15 @@ class Filters:
     self.filters()
 
 
-class Todo:
-  def __init__(self, curr):
-    self.curr = curr
-
-  def todo_currency(self):
-    self.curr.execute(
-      """
-      CREATE TABLE IF NOT EXISTS todo_currency (
-        id INTEGER,
-        tid SMALLINT,
-        currency_id SMALLINT,
-        value DECIMAL(10, 2)
-      )
-      """
-    )
-
-  def todo(self):
-    self.curr.execute(
-      """
-      CREATE TABLE IF NOT EXISTS todo (
-        id INTEGER,
-        uid SMALLINT,
-        title VARCHAR(50),
-        state BOOLEAN,
-        todo_currency_id INTEGER,
-        value DECIMAL(10, 2),
-        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-      )
-      """
-    )
-
-  def todo_item(self):
-    self.curr.execute(
-      """
-      CREATE TABLE IF NOT EXISTS todo_item (
-        id INTEGER,
-        uid SMALLINT,
-        tid SMALLINT,
-        title VARCHAR(50),
-        state BOOLEAN,
-        todo_currency_id INTEGER,
-        value DECIMAL(10, 2),
-        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-      )
-      """
-    )
-
-  def create_all(self):
-    self.todo_currency()
-    self.todo()
-    self.todo_item()
-
-
 def db_create_all(DB_FILEPATH):
     with sqlite3.connect(DB_FILEPATH) as conn:
         curr = conn.cursor()
 
-        Currency(curr).create_all()
+        Transaction(curr).create_all()
+        TransactionTransfer(curr).create_all()
         User(curr).create_all()
+        Currency(curr).create_all()
         Wallet(curr).create_all()
-        Scheduled(curr).create_all()
         Filters(curr).create_all()
-        Todo(curr).create_all()
 
         conn.commit()

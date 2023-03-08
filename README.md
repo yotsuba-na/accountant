@@ -119,6 +119,14 @@ $todo - body
 		id	INTEGER PRIMARY KEY
 		func	VARCHAR (10) NOT NULL {'increment', 'decrement'}
 
+-- transaction_transfer
+	id		INTEGER PRIMARY KEY
+	owner_id	INTEGER FOREIGN KEY @user
+	transfer_from	INTEGER FOREIGN KEY @wallet
+	transfer_to	INTEGER FOREIGN KEY @wallet
+	currency_id	INTEGER FOREIGN KEY @currency
+	value		DECIMAL NOT NULL
+
 -- user
 	id		INTEGER PRIMARY KEY
 	fullname	VARCHAR (50) NOT NULL
@@ -147,12 +155,4 @@ $todo - body
 	owner_id	INTEGER FOREIGN KEY @user
 	obj_name	VARCHAR (10) {'user', 'currency'}
 	obj_ids		TEXT    NOT NULL	-- TODO: OneToMany Relation
-
--- transaction_transfer
-	id		INTEGER PRIMARY KEY
-	owner_id	INTEGER FOREIGN KEY @user
-	transfer_from	INTEGER FOREIGN KEY @wallet
-	transfer_to	INTEGER FOREIGN KEY @wallet
-	currency_id	INTEGER FOREIGN KEY @currency
-	value		DECIMAL NOT NULL
 ```
