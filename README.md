@@ -97,53 +97,62 @@ $todo - body
 ```
 
 ### DB Tables
-| @table.currency | id  | currency | value | updated_at |
-| :-------------: | :-: | :------: | :---: | :--------: |
-|                 |  1  |    USD   |  0.45 | timestamp  |
-|                 |  2  |    JPY   |  0.20 | timestamp  |
+```SQL
+-- transaction
+	id 		INTEGER PRIMARY KEY
+	owner_id	INTEGER FOREIGN KEY @user
+	parent_id	INTEGER FOREIGN KEY @transaction
+	title		VARCHAR (50) NOT NULL
+	type_id		INTEGER FOREIGN KEY @transaction_type
+	function_id	INTEGER FOREIGN KEY @transaction_function
+	wallet_id	INTEGER FOREIGN KEY @wallet
+	currency_id	INTEGER FOREIGN KEY @currency
+	value		DECIMAL NOT NULL
+	created_at	DATETIME
+	updated_at	DATETIME
 
-| @table.users | id  | nickname | currency_id |
-| :----------: | :-: | :------: | :---------: |
-|              |  1  |  noName  |      1      |
+	-- transaction_type
+		id	INTEGER PRIMARY KEY
+		type	VARCHAR (10) NOT NULL {'planned', 'fact', 'scheduled', 'transfer'}
 
-<hr />
+	-- transactin_function
+		id	INTEGER PRIMARY KEY
+		func	VARCHAR (10) NOT NULL {'increment', 'decrement'}
 
-| @table.wallet | id  | u_id | balance | shared |
-| :-----------: | :-: | :--: | :-----: | :----: |
-|               |  1  |  1   |  32.49  | false  |
+-- user
+	id		INTEGER PRIMARY KEY
+	fullname	VARCHAR (50) NOT NULL
+	currency_id	INTEGER FOREIGN KEY @currency
 
-<hr />
+-- currency
+	id		INTEGER PRIMARY KEY
+	currency	VARCHAR (10) NOT NULL
+	value		DECIMAL NOT NULL
+	created_at	DATETIME
+	updated_at	DATETIME
 
-| @table.schedule_code | id  | code |
-| :------------------: | :-: | :--: |
-|                      |  1  |   d  |
-|                      |  2  |   m  |
+-- wallet
+	id		INTEGER PRIMARY KEY
+	title		VARCHAR (50)
+	owner_id	INTEGER FOREIGN KEY @user
+	balance		DECIMAL NOT NULL
+	type_id		INTEGER FOREIGN KEY @wallet_type
 
-| @table.func_code | id  | u_id | code |
-| :--------------: | :-: | :--: | :--: |
-|                  |  1  |  1   | inc  |
+	-- wallet_type
+		id	INTEGER PRIMARY KEY
+		type	VARCHAR (10) {'linked', 'shared', 'temporary'}
 
-| @table.schedule | id  | u_id | title | schedule_code_id | schedule_repeat | func_code_id | value | w_id |
-| :-------------: | :-: | :--: | :---: | :--------------: | :-------------: | :----------: | :---: | :--: |
-|                 |  1  |  1   | daily |         1        |        *        |       1      |  0.5  |  1   |
+-- filters
+	id		INTEGER PRIMARY KEY
+	owner_id	INTEGER FOREIGN KEY @user
+	obj_name	VARCHAR (10) {'user', 'currency'}
+	obj_ids		TEXT    NOT NULL	-- TODO: OneToMany Relation
 
-<hr />
-
-| @table.filters | id  | u_id | obj_name | obj_ids |
-| :------------: | :-: | :--: | :------: | :-----: |
-|                |  1  |  1   |  Users   | 1,2,3   |
-
-<hr />
-
-| @table.todo_currency | id  | t_id | currency_id | Value |
-| :------------------: | :-: | :--: | :---------: | :---: |
-|                      |  1  |   1  |      1      | 0.40  |
-
-| @table.todo | id  | u_id | title | State | todo_currency_id | value | created_at |
-| :---------: | :-: | :--: | :---: | :---: | :--------------: | :---: | :--------: |
-|             |  1  |  1   | my td |   0   |         1        | 10.00 | timestamp  |
-
-| @table.todo_item | id  | u_id | t_id | title | state | todo_currency_id | value | created_at |
-| :--------------: | :-: | :--: | :--: | :---: | :---: | :--------------: | :---: | :--------: |
-|                  |  1  |  1   |  1   | my t  |   0   |         1        |  5.0  | timestamp  |
-|                  |  2  |  1   |  1   | my d  |   0   |         1        |  5.0  | timestamp  |
+-- transaction_transfer
+	id		INTEGER PRIMARY KEY
+	owner_id	INTEGER FOREIGN KEY @user
+	transfer_from	INTEGER FOREIGN KEY @wallet
+	transfer_to	INTEGER FOREIGN KEY @wallet
+	currency_id	INTEGER FOREIGN KEY @currency
+	value		DECIMAL NOT NULL
+```
