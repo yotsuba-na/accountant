@@ -28,8 +28,9 @@
           <div class="valueView">
             <input type="checkbox">
             <div>
-              <span class="valueIn">444 USD</span><br />
-              <span class="valueOut">233 USD</span>
+              <span class="value">JPY<span><br />
+              <span class="valueIn">444</span><br />
+              <span class="valueOut">233</span>
             </div>
           </div>
         </div>
@@ -71,7 +72,6 @@
     <div class="dynamic">
 
       <div class="tabs left">
-
         <div class="tab users">
           {% for user in all_users %}
             <div class="userView">
@@ -88,50 +88,52 @@
         </div>
 
         <div class="tab wallets">
+          {% for wallet in all_wallets %}
+            <div class="walletView">
+              <input type="checkbox">
+              <div>
+                <span class="title">{{ wallet[1] }}</span><br />
+                <div class="valueView_1">
+                  <span class="value">{{ wallet[3] }}</span><br />
+                  <span class="valueIn">444 USD</span><br />
+                  <span class="valueOut">233 USD</span>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
         </div>
-
       </div>
 
-      <div class="middle">
-        <div class="income">
-
-          <div class="scheduleView">
-            <input type="checkbox">
-            <div>
-              <span class="scheduleName">It's monthly ?</span><br />
-              <span class="valueIn">444 USD</span>
-              <span class="scheduleRepeat">/mo</span>
+      <div class="tabs middle">
+        <div class="tab transaction-history">
+          {% for transaction in all_transactions %}
+            <div class="transactionView">
+              <input type="checkbox">
+              <div>
+                <span class="scheduleName">It's monthly ?</span><br />
+                <span class="valueIn">444 USD</span>
+                <span class="scheduleRepeat">/mo</span>
+              </div>
             </div>
-          </div>
-
+          {% endfor %}
         </div>
 
-        <hr />
-
-        <div class="notIncome">
-
-          <div class="scheduleView">
-            <input type="checkbox">
-            <div>
-              <span class="scheduleName">It's monthly ?</span><br />
-              <span class="valueOut">444 USD</span>
-              <span class="scheduleRepeat">/mo</span>
+        <div class="tab transaction-new">
+          <form id="transactionForm" action="{{ url_for('main.index') }}" method="POST">
+            <input id="transactionTitle" placeholder="Title" />
+            <input id="transactionValue" placeholder="Value" type="number" min="1" />
+            <select id="transactionType" onchange="showTransactionTypeFields(this);">
+              <option>Plan</option>
+              <option>Fact</option>
+              <option>Schedule</option>
+              <option>Transfer</option>
+            </select>
+            <div id="transactionTransferFields">
+              <input id="transactionTransferFrom" placeholder="transaction transfer from" />
+              <input id="transactionTransferTo" placeholder="transaction transfer to" />
             </div>
-          </div>
-
-        </div>
-        <div class="todos">
-          <div class="todo">
-            <p>User_1 :: 2022-12-12</p>
-            {% for todo in all_todos %}
-              <p>{{ todo }}</p>
-            {% endfor %}
-          </div>
-          <div class="todoItems">
-            <p>foo
-              <span>223 USD</span>
-            </p>
-          </div>
+            <button name="transactionForm">Submit</button>
+          </form>
         </div>
       </div>
 
