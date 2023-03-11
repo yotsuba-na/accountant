@@ -71,8 +71,12 @@
 
     <div class="dynamic">
 
-      <div class="tabs left">
-        <div class="tab users">
+      <div id="left" class="tabs">
+        <div class="tabs-list">
+          <button onclick="showTab(this, 'tab-users');">Users</button>
+          <button onclick="showTab(this, 'tab-wallets');">Wallets</button>
+        </div>
+        <div id="tab-users" class="tab">
           {% for user in all_users %}
             <div class="userView">
               <input type="checkbox">
@@ -87,7 +91,7 @@
           {% endfor %}
         </div>
 
-        <div class="tab wallets">
+        <div id="tab-wallets" class="tab">
           {% for wallet in all_wallets %}
             <div class="walletView">
               <input type="checkbox">
@@ -104,8 +108,8 @@
         </div>
       </div>
 
-      <div class="tabs middle">
-        <div class="tab transaction-history">
+      <div id="middle" class="tabs">
+        <div id="tab-transactionsHistory" class="tab">
           {% for transaction in all_transactions %}
             <div class="transactionView">
               <input type="checkbox">
@@ -118,7 +122,7 @@
           {% endfor %}
         </div>
 
-        <div class="tab transaction-new">
+        <div id="tab-transactionsNew" class="tab">
           <form id="transactionForm" action="{{ url_for('main.index') }}" method="POST">
             <input id="transactionTitle" placeholder="Title" />
             <input id="transactionValue" placeholder="Value" type="number" min="1" />

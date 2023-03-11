@@ -1,3 +1,15 @@
+/* Tabs
+ */
+
+function showTab(caller, tabId) {
+  const tabs = caller.parentNode.parentNode.children;
+  for (let i = 1; i < tabs.length; i++) {
+    document.getElementById(tabs[i].id).style.display = "none";
+  }
+  document.getElementById(tabId).style.display = "block";
+}
+
+
 /* Filters
  */
 
