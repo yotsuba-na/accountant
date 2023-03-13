@@ -123,20 +123,20 @@
         </div>
 
         <div id="tab-transactionsNew" class="tab">
-          <form id="transactionForm" action="{{ url_for('main.index') }}" method="POST">
-            <input id="transactionTitle" placeholder="Title" />
-            <input id="transactionValue" placeholder="Value" type="number" min="1" />
-            <select id="transactionType" onchange="showTransactionTypeFields(this);">
+          <form id="transactionForm" action="{{ url_for('main.transactions_add') }}" method="POST">
+            <input name="transactionTitle" placeholder="Title" />
+            <input name="transactionValue" placeholder="Value" type="number" min="1" />
+            <select name="transactionType" onchange="showTransactionTypeFields(this);">
               <option>Plan</option>
               <option>Fact</option>
               <option>Schedule</option>
               <option>Transfer</option>
             </select>
             <div id="transactionTransferFields">
-              <input id="transactionTransferFrom" placeholder="transaction transfer from" />
-              <input id="transactionTransferTo" placeholder="transaction transfer to" />
+              <input name="transactionTransferFrom" placeholder="transaction transfer from" />
+              <input name="transactionTransferTo" placeholder="transaction transfer to" />
             </div>
-            <button name="transactionForm">Submit</button>
+            <button>Submit</button>
           </form>
         </div>
       </div>

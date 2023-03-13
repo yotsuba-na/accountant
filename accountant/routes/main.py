@@ -1,9 +1,10 @@
 import sqlite3
 
-from flask import Blueprint, render_template, request
+from flask import Blueprint, request
+from flask import redirect, url_for, render_template
 
 from config import DB
-from accountant.sqldb import tables, query
+from accountant.sqldb import tables, crud
 
 
 # XXX: VOCABULARY
@@ -17,6 +18,24 @@ def current_logged_user():
     return 1
 
 
+@app.route('/transaction/add', methods=['POST'])
+def transactions_add():
+  print('>>', request.form)
+  # // get the transaction
+  # // crud .add
+  return redirect(url_for('main.index'))
+
+
+@app.route('/transaction/update', methods=['POST'])
+def transaction_update():
+  pass
+
+
+@app.route('/transaction/delete', methods=['POST'])
+def transaction_delete():
+  pass
+
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
   current_user = current_logged_user()
@@ -26,14 +45,14 @@ def index():
   with sqlite3.connect(DB.FILEPATH) as conn:
     curr = conn.cursor()
 
-    us2_users = query.Filter(curr).get(user_id=current_user, obj_name='user')
-    all_users = query.User(curr).get_all()
-    users_transactions = query.Transaction(curr).get_all(users_id=us2_users)
-    all_currencies = query.Currency(curr).get_all()
-    us2_currencies = query.Filter(curr).get(
+    us2_users = crud.Filter(curr).get(user_id=current_user, obj_name='user')
+    all_users = crud.User(curr).get_all()
+    users_transactions = crud.Transaction(curr).get_all(users_id=us2_users)
+    all_currencies = crud.Currency(curr).get_all()
+    us2_currencies = crud.Filter(curr).get(
       user_id=current_user, obj_name='currency'
     )
-    all_wallets = query.Wallet(curr).get_all()
+    all_wallets = crud.Wallet(curr).get_all()
 
   return render_template(
     'main.html',
