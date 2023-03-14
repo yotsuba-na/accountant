@@ -75,7 +75,9 @@
         <div class="tabs-list">
           <button onclick="showTab(this, 'tab-users');">Users</button>
           <button onclick="showTab(this, 'tab-wallets');">Wallets</button>
+          <button onclick="showTab(this, 'tab-currencies');">Currencies</button>
         </div>
+
         <div id="tab-users" class="tab">
           {% for user in all_users %}
             <div class="userView">
@@ -109,6 +111,10 @@
       </div>
 
       <div id="middle" class="tabs">
+        <div class="tabs-list">
+          <button onclick="showTab(this, 'tab-transactionsHistory');">Transactions</button>
+          <button onclick="showTab(this, 'tab-transactionsNew');">New Transactions</button>
+        </div>
         <div id="tab-transactionsHistory" class="tab">
           {% for transaction in all_transactions %}
             <div class="transactionView">
@@ -139,33 +145,6 @@
             <button>Submit</button>
           </form>
         </div>
-      </div>
-
-      <div class="right">
-        <table>
-          <thead>
-            <tr>
-              <th>#ID/N</th>
-              <th>User</th>
-              <th>In/Out</th>
-              <th>DateTime</th>
-            <tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>2</td>
-              <td>User_1</td>
-              <td><span class="valueOut">223 USD</span></td>
-              <td>2022-12-12 15:22:23</td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>User_1</td>
-              <td><span class="valueIn">444 USD</span></td>
-              <td>2022-12-12 12:22:23</td>
-            </tr>
-          </tbody>
-        </table>
       </div>
 
     </div>
