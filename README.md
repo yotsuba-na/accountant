@@ -122,6 +122,7 @@ $todo - body
 -- transaction_transfer
 	id		INTEGER PRIMARY KEY
 	owner_id	INTEGER FOREIGN KEY @user
+	transaction_id	INTEGER FOREIGN KEY @transaction
 	transfer_from	INTEGER FOREIGN KEY @wallet
 	transfer_to	INTEGER FOREIGN KEY @wallet
 	currency_id	INTEGER FOREIGN KEY @currency

@@ -68,12 +68,13 @@ class TransactionTransfer:
     self.curr.execute(
       """
       CREATE TABLE IF NOT EXISTS transaction_transfer (
-        id            INTEGER,
-        owner_id      INTEGER,
-        transfer_from INTEGER,
-        transfer_to   INTEGER,
-        currency_id   INTEGER,
-        value         DECIMAL (10, 2) NOT NULL
+        id              INTEGER,
+        owner_id        INTEGER,
+        transaction_id  INTEGER,
+        transfer_from   INTEGER,
+        transfer_to     INTEGER,
+        currency_id     INTEGER,
+        value           DECIMAL (10, 2) NOT NULL
       )
       """
     )
