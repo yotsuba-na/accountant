@@ -7,10 +7,6 @@ from config import DB
 from accountant.sqldb import tables, crud
 
 
-# XXX: VOCABULARY
-# us2 = user subscribed to
-
-
 app = Blueprint(
   'transaction', __name__, url_prefix='/transaction', static_folder='static'
 )

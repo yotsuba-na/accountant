@@ -14,12 +14,14 @@ class Transaction:
 
   def transaction(self):
     self.curr.execute(
+      # status: planned, fact
       """
       CREATE TABLE IF NOT EXISTS `transaction` (
         id          INTEGER,
         owner_id    INTEGER,
         parent_id   INTEGER,
         title       VARCHAR (50),
+        status      VARCHAR (10),
         type_id     INTEGER,
         function_id INTEGER,
         wallet_id   INTEGER,
@@ -32,7 +34,7 @@ class Transaction:
     )
 
   def transaction_type(self):
-    # types: {'planned', 'fact', 'scheduled', 'transfer'}
+    # types: {'regular', 'schedule', 'transfer'}
     self.curr.execute(
       """
       CREATE TABLE IF NOT EXISTS transaction_type (

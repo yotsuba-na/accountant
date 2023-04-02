@@ -103,6 +103,7 @@ $todo - body
 	owner_id	INTEGER FOREIGN KEY @user
 	parent_id	INTEGER FOREIGN KEY @transaction
 	title		VARCHAR (50) NOT NULL
+	status		VARCHAR (10) NOT NULL {'planned', 'fact'}
 	type_id		INTEGER FOREIGN KEY @transaction_type
 	function_id	INTEGER FOREIGN KEY @transaction_function
 	wallet_id	INTEGER FOREIGN KEY @wallet
@@ -113,7 +114,7 @@ $todo - body
 
 	-- transaction_type
 		id	INTEGER PRIMARY KEY
-		type	VARCHAR (10) NOT NULL {'planned', 'fact', 'scheduled', 'transfer'}
+		type	VARCHAR (10) NOT NULL {'regular', 'schedule', 'transfer'}
 
 	-- transactin_function
 		id	INTEGER PRIMARY KEY
