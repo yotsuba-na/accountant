@@ -129,7 +129,7 @@
         </div>
 
         <div id="tab-transactionsNew" class="tab">
-          <form id="transactionForm" action="{{ url_for('main.transactions_add') }}" method="POST">
+          <form id="transactionForm" action="{{ url_for('transaction.add') }}" method="POST">
             <input name="transactionTitle" placeholder="Title" />
             <input name="transactionValue" placeholder="Value" type="number" min="1" />
             <select name="transactionType" onchange="showTransactionTypeFields(this);">

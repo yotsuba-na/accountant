@@ -18,24 +18,6 @@ def current_logged_user():
     return 1
 
 
-@app.route('/transaction/add', methods=['POST'])
-def transactions_add():
-  print('>>', request.form)
-  # // get the transaction
-  # // crud .add
-  return redirect(url_for('main.index'))
-
-
-@app.route('/transaction/update', methods=['POST'])
-def transaction_update():
-  pass
-
-
-@app.route('/transaction/delete', methods=['POST'])
-def transaction_delete():
-  pass
-
-
 @app.route('/', methods=['GET', 'POST'])
 def index():
   current_user = current_logged_user()
