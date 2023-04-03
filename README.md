@@ -8,17 +8,20 @@ WebApp
     redirect(login)
   redirect(main)
 ```
-- [ ] / - widgets, summary, navbar with data and quick links
-  - [ ] add currency
+- [ ] / - summary, REST calls
 - [ ] /auth
   - [ ] /login
   - [ ] /register
   - [ ] /reset
   - [ ] /confirm
-- [ ] /user
-  - [ ] Add wallet
-  - [ ] Add schedule
-  - [ ] Add todo
+- [x] /user
+  - [x] Add wallet
+  - [ ] Add currency
+- [ ] /transaction
+  - [ ] Add transaction
+    - [x] Regular
+    - [ ] Schedule
+    - [ ] Transfer
 
 ### Main Page
 ```
