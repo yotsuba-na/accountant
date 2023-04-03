@@ -146,6 +146,7 @@ $todo - body
 	title		VARCHAR (50)
 	owner_id	INTEGER FOREIGN KEY @user
 	balance		DECIMAL NOT NULL
+	currency_id	INTEGER FOREIGN KEY @currency
 	type_id		INTEGER FOREIGN KEY @wallet_type
 
 	-- wallet_type

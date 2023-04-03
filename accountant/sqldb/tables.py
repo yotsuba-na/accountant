@@ -123,6 +123,16 @@ class Currency:
       """
     )
 
+    # TODO: rename *currency to *code
+    has_currencies = self.curr.execute("SELECT * FROM currency").fetchone()
+    if not has_currencies:
+      self.curr.executemany(
+        "INSERT INTO currency (currency, value) VALUES (?, ?)",
+        (
+          ('jpy', 1), ('usd', 1), ('rub', 1),
+        )
+      )
+
   def create_all(self):
     self.currency()
 
@@ -136,8 +146,10 @@ class Wallet:
       """
       CREATE TABLE IF NOT EXISTS wallet (
         id          INTEGER,
+        title       VARCHAR (50),
         owner_id    INTEGER,
-        balance     DECIMAL(10, 2),
+        balance     DECIMAL (10, 2),
+        currency_id INTEGER,
         type_id     INTEGER
       )
       """
@@ -153,6 +165,15 @@ class Wallet:
       )
       """
     )
+
+    has_types = self.curr.execute("SELECT * FROM wallet_type").fetchone()
+    if not has_types:
+      self.curr.executemany(
+        "INSERT INTO wallet_type (`type`) VALUES (?)",
+        (
+          ('linked',), ('shared',), ('temporary',),
+        )
+      )
 
   def create_all(self):
     self.wallet()

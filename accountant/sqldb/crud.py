@@ -158,6 +158,26 @@ class Wallet:
   def __init__(self, curr):
     self.curr = curr
 
+  def add(self, title: str, balance: int, currency: str, type_: str) -> int:
+    # TODO: use func
+    type_id = self.curr.execute(
+      "SELECT id FROM wallet_type WHERE `type` = ?",
+      (type_,)
+    ).fetchone()[0]
+
+    # TODO: use func
+    currency_id = self.curr.execute(
+      "SELECT id FROM currency WHERE currency = ?",
+      (currency,)
+    ).fetchone()[0]
+
+    self.curr.execute(
+      "INSERT INTO wallet (title, balance, currency_id, type_id) VALUES (?, ?, ?, ?)",
+      (title, balance, currency_id, type_id)
+    )
+
+    return self.curr.lastrowid
+
   def get_all(self, by_ids: list[int] | None = None) -> list:
     query = 'SELECT * FROM wallet'
 
