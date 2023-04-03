@@ -45,10 +45,19 @@ class TransactionType:
   def __init__(self, curr):
     self.curr = curr
 
+  # TODO: REMOVE: use *get_all instead
   def get(self, type_id: int):
     return self.curr.execute(
       "SELECT `type` FROM transaction_type WHERE id = ?", (type_id,)
     )
+
+  def get_all(self, types_id: list[int] | None = None):
+    query = "SELECT * FROM transaction_type"
+
+    if types_id is not None:
+      query += f" WHERE id IN {list_to_query_str(types_id)}"
+
+    return self.curr.execute(query).fetchall()
 
 
 class TransactionTransfer:

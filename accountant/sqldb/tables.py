@@ -44,6 +44,15 @@ class Transaction:
       """
     )
 
+    transaction_types = self.curr.execute("SELECT * FROM transaction_type").fetchone()
+    if not transaction_types:
+      self.curr.executemany(
+        "INSERT INTO transaction_type (type) VALUES (?)",
+        (
+          ('regular',), ('schedule',), ('transfer',),
+        )
+      )
+
   def transaction_function(self):
     # funcs: {'increment', 'decrement'}
     self.curr.execute(

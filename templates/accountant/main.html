@@ -98,9 +98,9 @@
             <input name="walletTitle" placeholder="Title" />
             <input name="walletBalance" type="number" min="1" placeholder="Balance" />
             <select name="walletCurrency">
-              <option value="jpy">JPY</option>
-              <option value="usd">USD</option>
-              <option value="rub">RUB</option>
+              {% for currency in all_currencies %}
+                <option value="{{ currency[1] }}">{{ currency[1] | upper }}</option>
+              {% endfor %}
             </select>
             <select name="walletType">
               <option value="linked">Linked to User</option>
@@ -148,10 +148,13 @@
             <input name="transactionTitle" placeholder="Title" />
             <input name="transactionValue" placeholder="Value" type="number" min="1" />
             <select name="transactionType" onchange="showTransactionTypeFields(this);">
-              <option>Plan</option>
-              <option>Fact</option>
-              <option>Schedule</option>
-              <option>Transfer</option>
+              {% for transaction_type in all_transaction_types %}
+                <option value="{{ transaction_type[0] }}">{{ transaction_type[1] }}</option>
+              {% endfor %}
+            </select>
+            <select name="transactionStatus" />
+                <option value="planned">Planned</option>
+                <option value="fact">Fact</option>
             </select>
             <div id="transactionTransferFields">
               <input name="transactionTransferFrom" placeholder="transaction transfer from" />
