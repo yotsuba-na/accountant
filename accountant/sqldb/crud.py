@@ -89,45 +89,26 @@ class Transaction:
   def __init__(self, curr):
     self.curr = curr
 
-  def _create_parent(self, user_id: int, data: dict) -> int:
-    parent_id = self.curr.execute(
-      """
-      INSERT INTO `transaction` (owner_id, title, value)
-        VALUES (?, ?, ?)
-      RETURNING id
-      """,
-      (user_id, data['title'], data['value'])
-    )
-    self.curr.commit()
-
-    return parent_id
-
   def _add_transfer(user_id: int, data: dict):
     pass
 
   def add(self, user_id: int, data: dict) -> int:
-    if not data.get('parent_id'):
-      return self._create_parent(user_id, data)
-
-    transaction_id = self.curr.execute(
-      """
-      INSERT INTO `transaction`
-        (
-          owner_id, parent_id, title,
-          type_id, function_id, wallet_id, currency_id, value
-        )
-      VALUES (
-        ?, ?, ?,
-        ?, ?, ?, ?, ?
-      )
-      """,
-      (
-        data[c] for c in (
-          'owner_id', 'parent_id', 'title',
-          'type_id', 'function_id', 'wallet_id', 'currency_id', 'value'
-        )
-      )
+    query = """
+    INSERT INTO `transaction` (
+      owner_id, parent_id, title, status,
+      type_id, function_id, wallet_id, currency_id, value
     )
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+    """
+    values = [
+      data[c] for c in (
+        'owner_id', 'parent_id', 'title', 'status',
+        'type_id', 'function_id', 'wallet_id', 'currency_id', 'value'
+      )
+    ]
+
+    self.curr.execute(query, values)
+    transaction_id = self.curr.lastrowid
 
     transaction_type = TransactionType(self.curr).get(data['type_id'])
     if transaction_type == 'transfer':

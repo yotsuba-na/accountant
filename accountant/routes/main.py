@@ -31,6 +31,7 @@ def index():
       user_id=current_user, obj_name='currency'
     )
     all_wallets = crud.Wallet(curr).get_all()
+    all_transactions = crud.Transaction(curr).get_all()
     all_transaction_types = crud.TransactionType(curr).get_all()
 
   return render_template(
@@ -41,5 +42,6 @@ def index():
     all_currencies=all_currencies,
     us2_currencies=us2_currencies,
     all_wallets=all_wallets,
+    all_transactions=all_transactions,
     all_transaction_types=all_transaction_types
   )
