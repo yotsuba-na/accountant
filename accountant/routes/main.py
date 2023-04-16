@@ -5,6 +5,7 @@ from flask import redirect, url_for, render_template
 
 from config import DB
 from accountant.sqldb import tables, crud
+from accountant.forms import TransactionForm
 
 
 app = Blueprint('main', __name__, url_prefix='/', static_folder='static')
@@ -43,5 +44,6 @@ def index():
     us2_currencies=us2_currencies,
     all_wallets=all_wallets,
     all_transactions=all_transactions,
-    all_transaction_types=all_transaction_types
+    all_transaction_types=all_transaction_types,
+    transaction_form=TransactionForm()
   )

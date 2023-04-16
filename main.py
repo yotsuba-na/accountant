@@ -11,6 +11,8 @@ app = Flask(
   static_folder='static/accountant',
   template_folder='templates/accountant'
 )
+app.config['WTF_CSRF_CHECK_DEFAULT'] = False
+
 
 
 if __name__ == '__main__':

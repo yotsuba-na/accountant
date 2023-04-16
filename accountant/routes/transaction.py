@@ -5,6 +5,7 @@ from flask import redirect, url_for, render_template
 
 from config import DB
 from accountant.sqldb import tables, crud
+from accountant.forms import TransactionForm
 
 
 app = Blueprint(
@@ -17,6 +18,11 @@ app = Blueprint(
 
 @app.route('/add', methods=['POST'])
 def add():
+  form = TransactionForm(request.form)
+
+  if not form.validate_on_submit():
+    return 404
+
   owner_id = 1
   parent_id = None
   title = request.form.get('transactionTitle')
@@ -28,20 +34,20 @@ def add():
   value = request.form.get('transactionValue')
 
   if all((title, value)):
-    data = {
-      'owner_id': 1,
-      'parent_id': parent_id,
-      'title': title,
-      'status': status,
-      'type_id': type_id,
-      'function_id': function_id,
-      'wallet_id': wallet_id,
-      'currency_id': currency_id,
-      'value': value
-    }
+    # data = {
+    #   'owner_id': 1,
+    #   'parent_id': parent_id,
+    #   'title': title,
+    #   'status': status,
+    #   'type_id': type_id,
+    #   'function_id': function_id,
+    #   'wallet_id': wallet_id,
+    #   'currency_id': currency_id,
+    #   'value': value
+    # }
     with sqlite3.connect(DB.FILEPATH) as conn:
       curr = conn.cursor()
-      crud.Transaction(curr).add(owner_id, data)
+      crud.Transaction(curr).add(owner_id, form)
       conn.commit()
 
   # // get the transaction

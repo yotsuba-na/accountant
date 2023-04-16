@@ -145,6 +145,17 @@
 
         <div id="tab-transactionsNew" class="tab">
           <form id="transactionForm" action="{{ url_for('transaction.add') }}" method="POST">
+            {{ transaction_form.parent_id }}
+            {{ transaction_form.name }}
+            {{ transaction_form.title }}
+            {{ transaction_form.status }}
+            {{ transaction_form.type_id }}
+            {{ transaction_form.function_id }}
+            {{ transaction_form.wallet_id }}
+            {{ transaction_form.currency_id }}
+            {{ transaction_form.value }}
+            {{ transaction_form.transaction_from }}
+            {{ transaction_form.transaction_to }}
             <input name="transactionTitle" placeholder="Title" />
             <input name="transactionValue" placeholder="Value" type="number" min="1" />
             <select name="transactionType" onchange="showTransactionTypeFields(this);">
