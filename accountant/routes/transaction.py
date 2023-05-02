@@ -23,35 +23,11 @@ def add():
   if not form.validate_on_submit():
     return 404
 
-  owner_id = 1
-  parent_id = None
-  title = request.form.get('transactionTitle')
-  status = request.form.get('transactionStatus')
-  type_id = request.form.get('transactionType')
-  function_id = 1
-  wallet_id = 1
-  currency_id = 1
-  value = request.form.get('transactionValue')
+  with sqlite3.connect(DB.FILEPATH) as conn:
+    curr = conn.cursor()
+    crud.Transaction(curr).add(owner_id, form)
+    conn.commit()
 
-  if all((title, value)):
-    # data = {
-    #   'owner_id': 1,
-    #   'parent_id': parent_id,
-    #   'title': title,
-    #   'status': status,
-    #   'type_id': type_id,
-    #   'function_id': function_id,
-    #   'wallet_id': wallet_id,
-    #   'currency_id': currency_id,
-    #   'value': value
-    # }
-    with sqlite3.connect(DB.FILEPATH) as conn:
-      curr = conn.cursor()
-      crud.Transaction(curr).add(owner_id, form)
-      conn.commit()
-
-  # // get the transaction
-  # // crud .add
   return redirect(url_for('main.index'))
 
 
