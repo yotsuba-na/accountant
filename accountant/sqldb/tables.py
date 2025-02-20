@@ -1,11 +1,8 @@
+import pathlib
 import sqlite3
-from os.path import join
-import os
-
-from flask import url_for
 
 
-__all__ = ('db_create_all', 'get_db_path')
+__all__ = ("db_create_all",)
 
 
 class Transaction:
@@ -210,7 +207,7 @@ class Filters:
     self.filters()
 
 
-def db_create_all(DB_FILEPATH):
+def db_create_all(DB_FILEPATH: pathlib.Path) -> None:
     with sqlite3.connect(DB_FILEPATH) as conn:
         curr = conn.cursor()
 

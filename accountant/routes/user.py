@@ -20,7 +20,7 @@ def add_wallet() -> int:
   if not all((wallet_title, wallet_balance)):
     return 404
 
-  with sqlite3.connect(DB.FILEPATH) as conn:
+  with sqlite3.connect(DB.DATABASE_FILEPATH) as conn:
     curr = conn.cursor()
     wallet_id = Wallet(curr).add(
       wallet_title, wallet_balance, wallet_currency, wallet_type

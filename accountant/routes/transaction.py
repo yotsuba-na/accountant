@@ -23,7 +23,7 @@ def add():
   if not form.validate_on_submit():
     return 404
 
-  with sqlite3.connect(DB.FILEPATH) as conn:
+  with sqlite3.connect(DB.DATABASE_FILEPATH) as conn:
     curr = conn.cursor()
     crud.Transaction(curr).add(owner_id, form)
     conn.commit()

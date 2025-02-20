@@ -1,9 +1,8 @@
-import os
+import pathlib
 
 
 class DB:
-  FILENAME = 'db.sqlite3'
-  FILEPATH = os.path.join('static', 'accountant')
-  if not os.path.exists(FILEPATH):
-    os.makedirs(FILEPATH, exist_ok=True)
-  FILEPATH = os.path.join(FILEPATH, FILENAME)
+    FILENAME: str = "db.sqlite3"
+    STATIC_PATH: pathlib.Path = pathlib.Path("static")
+    STATIC_PATH_ACCOUNTANT: pathlib.Path = STATIC_PATH / "accountant"
+    DATABASE_FILEPATH: pathlib.Path = STATIC_PATH / FILENAME
