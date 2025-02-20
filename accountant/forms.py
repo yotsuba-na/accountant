@@ -1,6 +1,21 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField
+from wtforms import StringField, IntegerField, FloatField
 from wtforms.validators import DataRequired
+
+
+class WalletForm(FlaskForm):
+    class Meta:
+        csrf = False
+
+    wallet_title = StringField("walletTitle", validators=[DataRequired()])
+    wallet_balance = FloatField("walletBalance", validators=[DataRequired()])
+    # TODO: choices
+    wallet_currency = StringField(
+        "walletCurrency",
+        validators=[DataRequired()],
+    )
+    # TODO: choices
+    wallet_type = StringField("walletType", validators=[DataRequired()])
 
 
 class TransactionForm(FlaskForm):
