@@ -61,6 +61,9 @@
   display: none;
 }
 
+#walletForm {
+  display: inline-grid;
+}
 
 #transactionForm {
   text-align: center;

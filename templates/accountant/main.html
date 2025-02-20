@@ -94,7 +94,7 @@
         </div>
 
         <div id="tab-wallets" class="tab">
-          <form name="walletForm" action="{{ url_for('user.add_wallet') }}" method="POST">
+          <form id="walletForm" name="walletForm" action="{{ url_for('user.add_wallet') }}" method="POST">
             <input name="walletTitle" placeholder="Title" />
             <input name="walletBalance" type="number" min="1" placeholder="Balance" />
             <select name="walletCurrency">
