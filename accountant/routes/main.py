@@ -1,10 +1,10 @@
 import sqlite3
 
 from flask import Blueprint, request
-from flask import redirect, url_for, render_template
+from flask import render_template
 
 from config import DB
-from accountant.sqldb import tables, crud
+from accountant.sqldb import crud
 from accountant.forms import TransactionForm
 
 
