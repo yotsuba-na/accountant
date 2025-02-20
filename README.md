@@ -102,7 +102,7 @@ $todo - body
 ### DB Tables
 ```SQL
 -- transaction
-	id 		INTEGER PRIMARY KEY
+	id 		INTEGER PRIMARY KEY AUTOINCREMENT
 	owner_id	INTEGER FOREIGN KEY @user
 	parent_id	INTEGER FOREIGN KEY @transaction
 	title		VARCHAR (50) NOT NULL
@@ -116,15 +116,15 @@ $todo - body
 	updated_at	DATETIME
 
 	-- transaction_type
-		id	INTEGER PRIMARY KEY
+		id	INTEGER PRIMARY KEY AUTOINCREMENT
 		type	VARCHAR (10) NOT NULL {'regular', 'schedule', 'transfer'}
 
 	-- transactin_function
-		id	INTEGER PRIMARY KEY
+		id	INTEGER PRIMARY KEY AUTOINCREMENT
 		func	VARCHAR (10) NOT NULL {'increment', 'decrement'}
 
 -- transaction_transfer
-	id		INTEGER PRIMARY KEY
+	id		INTEGER PRIMARY KEY AUTOINCREMENT
 	owner_id	INTEGER FOREIGN KEY @user
 	transaction_id	INTEGER FOREIGN KEY @transaction
 	transfer_from	INTEGER FOREIGN KEY @wallet
@@ -133,19 +133,19 @@ $todo - body
 	value		DECIMAL NOT NULL
 
 -- user
-	id		INTEGER PRIMARY KEY
+	id		INTEGER PRIMARY KEY AUTOINCREMENT
 	fullname	VARCHAR (50) NOT NULL
 	currency_id	INTEGER FOREIGN KEY @currency
 
 -- currency
-	id		INTEGER PRIMARY KEY
+	id		INTEGER PRIMARY KEY AUTOINCREMENT
 	currency	VARCHAR (10) NOT NULL
 	value		DECIMAL NOT NULL
 	created_at	DATETIME
 	updated_at	DATETIME
 
 -- wallet
-	id		INTEGER PRIMARY KEY
+	id		INTEGER PRIMARY KEY AUTOINCREMENT
 	title		VARCHAR (50)
 	owner_id	INTEGER FOREIGN KEY @user
 	balance		DECIMAL NOT NULL
@@ -153,11 +153,11 @@ $todo - body
 	type_id		INTEGER FOREIGN KEY @wallet_type
 
 	-- wallet_type
-		id	INTEGER PRIMARY KEY
+		id	INTEGER PRIMARY KEY AUTOINCREMENT
 		type	VARCHAR (10) {'linked', 'shared', 'temporary'}
 
 -- filters
-	id		INTEGER PRIMARY KEY
+	id		INTEGER PRIMARY KEY AUTOINCREMENT
 	owner_id	INTEGER FOREIGN KEY @user
 	obj_name	VARCHAR (10) {'user', 'currency'}
 	obj_ids		TEXT    NOT NULL	-- TODO: OneToMany Relation
